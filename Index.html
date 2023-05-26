@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="carrito.js" async></script>
+    <title>Una monedita pa los streams loco</title>
+</head>
+
+<body>
+    <header>
+        <h1>Donen platita cabros</h1>
+    </header>
+    <section class="contenedor">
+        <div class="contenedor-producto">
+            <div class="producto">
+                <span class="nombre-producto">Arroz</span>
+                <img src="img/arroz.png" alt="FOTOPRODUCTO" class="imagen-producto">
+                <span class="precio-producto">$10.000</span>
+                <button class="boton-producto">Añadir al carrito</button>
+            </div>
+            <div class="producto">
+                <span class="nombre-producto">Azucar</span>
+                <img src="img/azucar.png" alt="FOTOPRODUCTO" class="imagen-producto">
+                <span class="precio-producto">$15.000</span>
+                <button class="boton-producto">Añadir al carrito</button>
+            </div>
+            <div class="producto">
+                <span class="nombre-producto">Fideos</span>
+                <img src="img/fideos.png" alt="FOTOPRODUCTO" class="imagen-producto">
+                <span class="precio-producto">$20.000</span>
+                <button class="boton-producto">Añadir al carrito</button>
+            </div>
+            <div class="producto">
+                <span class="nombre-producto">Tomate</span>
+                <img src="img/tomate.png" alt="FOTOPRODUCTO" class="imagen-producto">
+                <span class="precio-producto">$25.000</span>
+                <button class="boton-producto">Añadir al carrito</button>
+            </div>
+        </div>
+        <div class="carrito">
+            <div class="header-carrito">
+                <h2>Carrito</h2>
+            </div>
+            <div class="productos-carrito">
+                <div class="producto-carrito">
+                    <img src="img/arroz.png" alt="" width="80px">
+                    <div class="detalle-producto-carrito">
+                        <span class="nombre-producto-carrito">Arroz </span>
+                        <div class="selector-cantidad">
+                            <i class="fa-solid fa-minus restar-producto"></i>
+                            <input type="text" value="1" class="cantidad-producto-carrito" disabled>
+                            <i class="fa-solid fa-plus agregar-producto"></i>
+                        </div>
+                        <span class="precio-producto-carrito"> $25.000</span>
+                    </div>
+                    <span class="btn-eliminar">
+                        <i class="fa-solid fa-trash"></i>
+                    </span>
+                </div>
+                <div class="producto-carrito">
+                    <img src="img/arroz.png" alt="" width="80px">
+                    <div class="detalle-producto-carrito">
+                        <span class="nombre-producto-carrito">Arroz </span>
+                        <div class="selector-cantidad">
+                            <i class="fa-solid fa-minus restar-producto"></i>
+                            <input type="text" value="3" class="cantidad-producto-carrito" disabled>
+                            <i class="fa-solid fa-plus agregar-producto"></i>
+                        </div>
+                        <span class="precio-producto-carrito"> $25.000</span>
+                    </div>
+                    <span class="btn-eliminar">
+                        <i class="fa-solid fa-trash"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="total-carrito">
+                <div class="fila">
+                    <strong>Total</strong>
+                    <span class="precio-total-carrito">
+                        $200.000
+                    </span>
+                </div>
+                <button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i></button>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+
+</html>
