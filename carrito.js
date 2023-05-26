@@ -1,4 +1,4 @@
-let verCarro = false;
+let carritoVisible = false;
 
 if (document.readyState == 'loading') {
     document.addEventListener('DOMContentLoaded', ready);
@@ -32,8 +32,8 @@ function ready() {
 
 
 function eliminarProducto(event) {
-    let button  = event.target;
-    button .parentElement.remove();
+    let button = event.target;
+    button.parentElement.remove();
 
     actualizarTotal();
     ocultarCarrito();
@@ -69,18 +69,17 @@ function ocultarCarrito() {
         let carrito = document.getElementsByClassName('carrito')[0];
         carrito.style.marginRight = '-100%';
         carrito.style.opacity = '0';
-        verCarro = false;
+        carritoVisible = false;
 
-        let productos = document.getElementsByClassName('contenedor-productos');
-        for (let i = 0; i < productos.length; i++) {
-            productos[i].style.width = '100%';
+        let productos = document.getElementsByClassName('contenedor-producto');
+        productos.style.width = '100%';
         }
     }
-}
+
 
 function sumarProducto(event) {
-    let button  = event.target;
-    let selector = button .parentElement;
+    let button = event.target;
+    let selector = button.parentElement;
     let cantidadProducto = selector.getElementsByClassName('cantidad-producto-carrito')[0];
     let cantidadActual = parseInt(cantidadProducto.value);
     console.log(cantidadActual);
@@ -91,8 +90,8 @@ function sumarProducto(event) {
 }
 
 function restarProducto(event) {
-    let button  = event.target;
-    let selector = button .parentElement;
+    let button = event.target;
+    let selector = button.parentElement;
     let cantidadProducto = selector.getElementsByClassName('cantidad-producto-carrito')[0];
     let cantidadActual = parseInt(cantidadProducto.value);
     console.log(cantidadActual);
@@ -106,8 +105,8 @@ function restarProducto(event) {
 
 
 function agregarAlCarro(event) {
-    let button  = event.target;
-    let producto = button .parentElement;
+    let button = event.target;
+    let producto = button.parentElement;
     let nombreProducto = producto.getElementsByClassName('nombre-producto')[0].innerText;
     console.log(nombreProducto);
     let precio = producto.getElementsByClassName('precio-producto')[0].innerText;
@@ -116,32 +115,35 @@ function agregarAlCarro(event) {
 
     agregarProductoAlCarro(nombreProducto, precio, imagenProducto);
 
-    carritoVisible()
+    hacerVisibleCarrito();
 }
-function carritoVisible (){
-     verCarro = true;
+
+function hacerVisibleCarrito() {
+    carritoVisible = true;
     let carrito = document.getElementsByClassName('carrito')[0];
-    carrito.style.marginRight = '0'
-    carrito.style.opacity= '1'
+    carrito.style.marginRight = '0';
+    carrito.style.opacity = '1';
 
-
-    let productos = document.getElementsByClassName('contenedor-productos')[0];
-    productos.style.width = '60% '
+    let productos = document.getElementsByClassName('contenedor-producto')[0];
+    productos.style.width = '60%';
 }
+
 
 function agregarProductoAlCarro(nombreProducto, precio, imagenProducto) {
     let producto = document.createElement('div');
-    producto.classList.add = 'producto';
-    let itemsCarrito = document.getElementsByClassName('producto-carrito')[0];
+    producto.classList.add = ('producto');
+    let itemsCarrito = document.getElementsByClassName('productos-carrito')[0];
+
+
     let nombreProductoCarrito = itemsCarrito.getElementsByClassName('nombre-producto-carrito');
     for (let i = 0; i < nombreProductoCarrito.length; i++) {
         if (nombreProductoCarrito[i].innerText == nombreProducto) {
-            sumarProducto();
-
+            alert("El item ya se encuentra en el carrito");
+            return;
         }
     }
 
-    let contenidoProducto =     `
+    let contenidoProducto = `
     <div class="producto-carrito">
     <img src="${imagenProducto}" alt="" width="80px">
     <div class="detalle-producto-carrito">
@@ -157,18 +159,17 @@ function agregarProductoAlCarro(nombreProducto, precio, imagenProducto) {
         <i class="fa-solid fa-trash"></i>
     </span>
     </div>
-`;
-        ;
+`
     producto.innerHTML = contenidoProducto;
     itemsCarrito.append(producto);
 
     producto.getElementsByClassName('btn-eliminar')[0].addEventListener('click', eliminarProducto);
 
     let botonRestar = producto.getElementsByClassName('restar-producto')[0];
-    botonRestar.addEventListener('click',restarProducto);
+    botonRestar.addEventListener('click', restarProducto);
 
     let botonSumar = producto.getElementsByClassName('agregar-producto')[0];
-    botonSumar.addEventListener('click',sumarProducto);
+    botonSumar.addEventListener('click', sumarProducto);
 
 
     actualizarTotal();
