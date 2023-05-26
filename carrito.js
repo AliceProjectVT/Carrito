@@ -1,4 +1,4 @@
-let mostrarCarro = false;
+let verCarro = false;
 
 if (document.readyState == 'loading') {
     document.addEventListener('DOMContentLoaded', ready);
@@ -24,7 +24,7 @@ function ready() {
         button.addEventListener('click', restarProducto);
     }
     let botonesAñadirCarrito = document.getElementsByClassName('boton-producto')
-    for(let i=0;  i < botonesAñadirCarrito.length; i++ ){
+    for (let i = 0; i < botonesAñadirCarrito.length; i++) {
         let button = botonesAñadirCarrito[i];
         button.addEventListener('click', agregarAlCarro)
     }
@@ -32,8 +32,8 @@ function ready() {
 
 
 function eliminarProducto(event) {
-    let pulsarBoton = event.target;
-    pulsarBoton.parentElement.remove();
+    let button  = event.target;
+    button .parentElement.remove();
 
     actualizarTotal();
     ocultarCarrito();
@@ -69,16 +69,18 @@ function ocultarCarrito() {
         let carrito = document.getElementsByClassName('carrito')[0];
         carrito.style.marginRight = '-100%';
         carrito.style.opacity = '0';
-        carritoVisible = false;
+        verCarro = false;
 
-        let productos = document.getElementsByClassName('contenedor-producto');
-        productos.style.width = '100%';
+        let productos = document.getElementsByClassName('contenedor-productos');
+        for (let i = 0; i < productos.length; i++) {
+            productos[i].style.width = '100%';
+        }
     }
 }
 
 function sumarProducto(event) {
-    let pulsarBoton = event.target;
-    let selector = pulsarBoton.parentElement;
+    let button  = event.target;
+    let selector = button .parentElement;
     let cantidadProducto = selector.getElementsByClassName('cantidad-producto-carrito')[0];
     let cantidadActual = parseInt(cantidadProducto.value);
     console.log(cantidadActual);
@@ -89,21 +91,86 @@ function sumarProducto(event) {
 }
 
 function restarProducto(event) {
-    let pulsarBoton = event.target;
-    let selector = pulsarBoton.parentElement;
+    let button  = event.target;
+    let selector = button .parentElement;
     let cantidadProducto = selector.getElementsByClassName('cantidad-producto-carrito')[0];
     let cantidadActual = parseInt(cantidadProducto.value);
     console.log(cantidadActual);
     cantidadActual--;
-    if(cantidadActual>=1){     
-    cantidadProducto.value = cantidadActual;
-    selector.getElementsByClassName('cantidad-producto-carrito')[0].value = cantidadActual;
-    actualizarTotal();
-}
+    if (cantidadActual >= 1) {
+        cantidadProducto.value = cantidadActual;
+        selector.getElementsByClassName('cantidad-producto-carrito')[0].value = cantidadActual;
+        actualizarTotal();
+    }
 }
 
-function agregarAlCarro(event){
-    let pulsarBoton = event.target;
-    let producto = pulsarBoton-parentElement;
-    let nombreProducto = item.getElementsByClassName('nombre-producto')[0]
+
+function agregarAlCarro(event) {
+    let button  = event.target;
+    let producto = button .parentElement;
+    let nombreProducto = producto.getElementsByClassName('nombre-producto')[0].innerText;
+    console.log(nombreProducto);
+    let precio = producto.getElementsByClassName('precio-producto')[0].innerText;
+    let imagenProducto = producto.getElementsByClassName('imagen-producto')[0].src;
+    console.log(imagenProducto);
+
+    agregarProductoAlCarro(nombreProducto, precio, imagenProducto);
+
+    carritoVisible()
 }
+function carritoVisible (){
+     verCarro = true;
+    let carrito = document.getElementsByClassName('carrito')[0];
+    carrito.style.marginRight = '0'
+    carrito.style.opacity= '1'
+
+
+    let productos = document.getElementsByClassName('contenedor-productos')[0];
+    productos.style.width = '60% '
+}
+
+function agregarProductoAlCarro(nombreProducto, precio, imagenProducto) {
+    let producto = document.createElement('div');
+    producto.classList.add = 'producto';
+    let itemsCarrito = document.getElementsByClassName('producto-carrito')[0];
+    let nombreProductoCarrito = itemsCarrito.getElementsByClassName('nombre-producto-carrito');
+    for (let i = 0; i < nombreProductoCarrito.length; i++) {
+        if (nombreProductoCarrito[i].innerText == nombreProducto) {
+            sumarProducto();
+
+        }
+    }
+
+    let contenidoProducto =     `
+    <div class="producto-carrito">
+    <img src="${imagenProducto}" alt="" width="80px">
+    <div class="detalle-producto-carrito">
+        <span class="nombre-producto-carrito">${nombreProducto}</span>
+        <div class="selector-cantidad">
+            <i class="fa-solid fa-minus restar-producto"></i>
+            <input type="text" value="1" class="cantidad-producto-carrito" disabled>
+            <i class="fa-solid fa-plus agregar-producto"></i>
+        </div>
+        <span class="precio-producto-carrito">${precio}</span>
+    </div>
+    <span class="btn-eliminar">
+        <i class="fa-solid fa-trash"></i>
+    </span>
+    </div>
+`;
+        ;
+    producto.innerHTML = contenidoProducto;
+    itemsCarrito.append(producto);
+
+    producto.getElementsByClassName('btn-eliminar')[0].addEventListener('click', eliminarProducto);
+
+    let botonRestar = producto.getElementsByClassName('restar-producto')[0];
+    botonRestar.addEventListener('click',restarProducto);
+
+    let botonSumar = producto.getElementsByClassName('agregar-producto')[0];
+    botonSumar.addEventListener('click',sumarProducto);
+
+
+    actualizarTotal();
+}
+
