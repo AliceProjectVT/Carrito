@@ -222,3 +222,6 @@ padding: 30px;
     }
 
   }
+  .toastify-terracotta {
+    background: linear-gradient(45deg, #8B4513, #D2691E);
+  }

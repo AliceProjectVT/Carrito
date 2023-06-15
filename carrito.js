@@ -1,4 +1,8 @@
-let carritoVisible = false;
+
+
+
+
+/*let carritoVisible = false;
 
 if (document.readyState == 'loading') {
     document.addEventListener('DOMContentLoaded', ready);
@@ -173,4 +177,4 @@ function agregarProductoAlCarro(nombreProducto, precio, imagenProducto) {
 
     actualizarTotal();
 }
-
+*/
